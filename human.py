@@ -1,3 +1,6 @@
+from winsound import PlaySound
+
+
 class Human():
 
     def __init__(self, name):
@@ -20,7 +23,7 @@ class Human():
     def make_move(self):
         while True:
             self.position = input(
-                f"Please enter 1 to 9 to represent the postion you want to place your symbol:\n")
+                f"{self.name} please enter 1 to 9 to represent the postion you want to place your symbol:\n")
             try:
                 self.position = int(self.position)
                 if self.position not in range(0, 10):
