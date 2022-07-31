@@ -1,5 +1,4 @@
-
-from lib2to3.pytree import HUGE
+from human import Human
 
 
 class Game:
@@ -36,12 +35,20 @@ class Game:
                 continue
         return user_input
 
-    def determine_user_num(self):
+    def determine_user_num_symbol(self):
         self.check_user_input(2)
         self.number_of_human_player = self.check_user_input(2)
         if self.number_of_human_player == 2:
-            self.player1 = Human()
-            self.player2 = Human()
+            self.player1 = Human("Human Player 1")
+            self.player2 = Human("Human Player 2")
+        print(f"-----{self.player1.name} is choosing symbol-----")
+        self.player1.choose_symbol()
+        if self.player1.symbol == "X":
+            self.player2.symbol == "O"
+        else:
+            self.player2.symbol = "X"
+        print(f"{self.player1.name} chose {self.player1.symbol}")
+        print(f"{self.player2.name} chose {self.player2.symbol}")
         # if self.number_of_human_player == 1:
         #     self.player1 = Human()
         #     self.player2 = Machine()
@@ -78,7 +85,7 @@ class Game:
         # algorithms to run the game
         print("game starts")
         self.display_board(self.board_new)
-        self.determine_user_num()
+        self.determine_user_num_symbol()
 
 
 game_one = Game()
