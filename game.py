@@ -168,10 +168,26 @@ class Game:
         return self.game_on
 
     def is_play_again(self):
-        pass
+        while True:
+            self.play_again = input(f"Do you want to play again? Enter y/n:\n")
+            if self.play_again == "y" or self.play_again == "Y" or self.play_again == "YES" or self.play_again == "yes":
+                self.board = [
+                    ["|", " ", "|", " ", "|", " ", "|"],
+                    ["-", "+", "-", "+", "-", "+", "-"],
+                    ["|", " ", "|", " ", "|", " ", "|"],
+                    ["-", "+", "-", "+", "-", "+", "-"],
+                    ["|", " ", "|", " ", "|", " ", "|"],
+                    ["-", "+", "-", "+", "-", "+", "-"], ]
+                self.run_game()
+            elif self.play_again == "n" or self.play_again == "N" or self.play_again == "NO" or self.play_again == "no":
+                self.end_game_message()
+                break
+            else:
+                print("please check your input, try again")
+                continue
 
     def end_game_message(self):
-        pass
+        print("\nThank you for playing Tic Tac Toe, see you next time!")
 
     def run_game(self):
         # algorithms to run the game
@@ -200,6 +216,7 @@ class Game:
                 break
             else:
                 self.counter += 1
+        self.is_play_again()
 
 
 game_one = Game()
