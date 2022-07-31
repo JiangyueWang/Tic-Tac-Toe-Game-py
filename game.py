@@ -7,10 +7,10 @@ class Game:
     def __init__(self):
         self.player1 = ""
         self.player2 = ""
-        self.board_row1 = ["|", " ", "|", " ", "|"]
-        self.board_row2 = ["|", " ", "|", " ", "|"]
-        self.board_row3 = ["|", " ", "|", " ", "|"]
-        pass
+        self.board_new = [
+            ["|", " ", "|", " ", "|"],
+            ["|", " ", "|", " ", "|"],
+            ["|", " ", "|", " ", "|"]]
 
     def welcome_message(self):
         print(f"Welcome to the Tic Tac Toe game!\n")
@@ -36,17 +36,20 @@ class Game:
     def determine_user_num(self):
         self.check_user_input(2)
         self.number_of_human_player = self.check_user_input(2)
-        if self.number_of_human_player == 1:
+        if self.number_of_human_player == 2:
             self.player1 = Human()
-            self.player2 = Machine()
+            self.player2 = Human()
+        # if self.number_of_human_player == 1:
+        #     self.player1 = Human()
+        #     self.player2 = Machine()
         # elif self.number_of_human_player == 2:
         #     self.player1 = Human()
         #     self.player2 = Human()
 
-    def display_board(self, row1, row2, row3):
-        print(" ".join(row1))
-        print(" ".join(row2))
-        print(" ".join(row3))
+    def display_board(self, board):
+        for i in board:
+            print(" ".join(i))
+        # print(" ".join(board))
         # print(self.board_row2)
         # print(self.board_row3)
 
@@ -71,7 +74,7 @@ class Game:
     def run_game(self):
         # algorithms to run the game
         print("game starts")
-        self.display_board(self.board_row1, self.board_row2, self.board_row3)
+        self.display_board(self.board_new)
         self.determine_user_num()
 
 
