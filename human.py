@@ -10,12 +10,12 @@ class Human():
 
     def choose_symbol(self):
         while True:
-            self.user_input = input("Do you want to be 'X' or 'O'?\n").upper()
-            if self.user_input == 'X':
+            self.user_input = input("Do you want to be 'X' or 'O'?\n")
+            if self.user_input == 'X' or self.user_input == "x":
                 self.symbol = 'X'
                 break
-            elif self.user_input == 'O':
-                self.symbol = 'X'
+            elif self.user_input == 'O' or self.user_input == 'o':
+                self.symbol = 'O'
                 break
             else:
                 print("Check your entry, select again")
