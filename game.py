@@ -215,5 +215,5 @@ class Game:
         self.is_play_again()
 
 
-game_one = Game()
-game_one.run_game()
+# game_one = Game()
+# game_one.run_game()
