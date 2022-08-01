@@ -1,6 +1,3 @@
-from winsound import PlaySound
-
-
 class Human():
 
     def __init__(self, name):

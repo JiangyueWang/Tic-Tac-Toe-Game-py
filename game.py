@@ -1,6 +1,3 @@
-from itertools import count
-from math import fabs
-from pickle import TRUE
 from human import Human
 
 
@@ -16,6 +13,7 @@ class Game:
             ["-", "+", "-", "+", "-", "+", "-"],
             ["|", " ", "|", " ", "|", " ", "|"],
             ["-", "+", "-", "+", "-", "+", "-"], ]
+        self.game_on = True
 
     def welcome_message(self):
         print(f"Welcome to the Tic Tac Toe game!\n")
@@ -50,7 +48,7 @@ class Game:
         else:
             self.player2.symbol = "X"
         print(f"{self.player1.name} chose {self.player1.symbol}")
-        print(f"{self.player2.name} chose {self.player2.symbol}")
+        print(f"{self.player2.name} chose {self.player2.symbol}\n")
 
         # if self.number_of_human_player == 1:
         #     self.player1 = Human()
@@ -90,82 +88,82 @@ class Game:
     def machine_turn(self):
         pass
 
-    def determine_winner(self, counter):
-        self.game_on = True
+    def determine_winner(self, is_game_on, counter):
+
         if counter == 9:
             print('tie, board full, no winner')
-            self.game_on = False
+            is_game_on = False
         else:
             # player1 is the winner
             if self.board[0][1] == self.board[0][3] == self.board[0][5] == self.player1.symbol:
                 # player1 top row wins
                 print(f"{self.player1.name} wins")
-                self.game_on = False
+                is_game_on = False
             elif self.board[2][1] == self.board[2][3] == self.board[2][5] == self.player1.symbol:
                 # player1 middle row wins
                 print(f"{self.player1.name} wins")
-                self.game_on = False
+                is_game_on = False
             elif self.board[4][1] == self.board[4][3] == self.board[4][5] == self.player1.symbol:
                 # player1 bottom row wins
                 print(f"{self.player1.name} wins")
-                self.game_on = False
+                is_game_on = False
 
             elif self.board[0][1] == self.board[2][1] == self.board[4][1] == self.player1.symbol:
                 # player1 first column wins
                 print(f"{self.player1.name} wins")
-                self.game_on = False
+                is_game_on = False
             elif self.board[0][3] == self.board[2][3] == self.board[4][3] == self.player1.symbol:
                 # player1 second column wins
                 print(f"{self.player1.name} wins")
-                self.game_on = False
+                is_game_on = False
             elif self.board[0][5] == self.board[2][3] == self.board[4][5] == self.player1.symbol:
                 # player1 second column wins
                 print(f"{self.player1.name} wins")
-                self.game_on = False
+                is_game_on = False
             elif self.board[0][1] == self.board[2][3] == self.board[4][5] == self.player1.symbol:
                 # player1 diagonal wins
                 print(f"{self.player1.name} wins")
-                self.game_on = False
+                is_game_on = False
             elif self.board[0][5] == self.board[2][3] == self.board[4][1] == self.player1.symbol:
                 # player1 diagonal wins
                 print(f"{self.player1.name} wins")
-                self.game_on = False
+                is_game_on = False
 
             # player2 is the winner
             elif self.board[0][1] == self.board[0][3] == self.board[0][5] == self.player2.symbol:
                 # player2 top row wins
                 print(f"{self.player2.name} wins")
-                self.game_on = False
+                is_game_on = False
             elif self.board[2][1] == self.board[2][3] == self.board[2][5] == self.player2.symbol:
                 # player2 middle row wins
                 print(f"{self.player2.name} wins")
-                self.game_on = False
+                is_game_on = False
             elif self.board[4][1] == self.board[4][3] == self.board[4][5] == self.player2.symbol:
                 # player2 bottom row wins
                 print(f"{self.player2.name} wins")
-                self.game_on = False
+                is_game_on = False
 
             elif self.board[0][1] == self.board[2][1] == self.board[4][1] == self.player2.symbol:
                 # player2 first column wins
                 print(f"{self.player2.name} wins")
-                self.game_on = False
+                is_game_on = False
             elif self.board[0][3] == self.board[2][3] == self.board[4][3] == self.player2.symbol:
                 # player2 second column wins
                 print(f"{self.player2.name} wins")
-                self.game_on = False
+                is_game_on = False
             elif self.board[0][5] == self.board[2][3] == self.board[4][5] == self.player2.symbol:
                 # player2 second column wins
                 print(f"{self.player2.name} wins")
-                self.game_on = False
+                is_game_on = False
             elif self.board[0][1] == self.board[2][3] == self.board[4][5] == self.player2.symbol:
                 # player2 diagonal wins
                 print(f"{self.player2.name} wins")
-                self.game_on = False
+                is_game_on = False
             elif self.board[0][5] == self.board[2][3] == self.board[4][1] == self.player2.symbol:
                 # player2 diagonal wins
                 print(f"{self.player2.name} wins")
-                self.game_on = False
-        return self.game_on
+                is_game_on = False
+        return is_game_on
 
     def is_play_again(self):
         while True:
@@ -195,27 +193,25 @@ class Game:
         self.display_board(self.board)
         self.determine_user_num_symbol()
         self.counter = 0
-        while True:
+        while self.game_on:
             # player 1 move
             self.player1.make_move()
             print(f"\n")
             self.update_board(self.player1.position, self.player1.symbol)
-            self.determine_winner(self.counter)
-            if self.game_on == False:
-                break
-            else:
-                self.counter += 1
+            self.counter += 1
+            self.game_on = self.determine_winner(self.game_on, self.counter)
+            # if self.game_on == False:
+            #     break
 
             # player 2 move
             self.player2.make_move()
             print(f"\n")
             self.update_board(self.player2.position, self.player2.symbol)
             self.counter += 1
-            self.determine_winner(self.counter)
-            if self.game_on == False:
-                break
-            else:
-                self.counter += 1
+            self.game_on = self.determine_winner(self.game_on, self.counter)
+            # if self.game_on == False:
+            #     break
+
         self.is_play_again()
 
 
