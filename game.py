@@ -202,15 +202,15 @@ class Game:
             self.game_on = self.determine_winner(self.game_on, self.counter)
             # if self.game_on == False:
             #     break
-
-            # player 2 move
-            self.player2.make_move()
-            print(f"\n")
-            self.update_board(self.player2.position, self.player2.symbol)
-            self.counter += 1
-            self.game_on = self.determine_winner(self.game_on, self.counter)
-            # if self.game_on == False:
-            #     break
+            if self.game_on == True:
+                # player 2 can only move when the self.game_on is True
+                # player 2 move
+                self.player2.make_move()
+                print(f"\n")
+                self.update_board(self.player2.position, self.player2.symbol)
+                self.counter += 1
+                self.game_on = self.determine_winner(
+                    self.game_on, self.counter)
 
         self.is_play_again()
 
